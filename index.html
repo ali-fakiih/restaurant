@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100d0a"><meta name="description" content="Explore a sample restaurant menu. Prices and pictures are examples.">
+<title>Restaurant Name | Signature Dining Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#171714;--panel:#20201c;--panel2:#25251f;--ink:#f6f0e5;--muted:#b8b1a3;--gold:#c8a96a;--line:#39372f;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:145px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55}button,input{font:inherit}button{cursor:pointer}
+.hero{position:relative;overflow:hidden;padding:52px 22px 34px;text-align:center;background:radial-gradient(ellipse at 50% -35%,#5b4a2b 0,transparent 66%),linear-gradient(180deg,#23221c 0%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+.hero:before,.hero:after{content:"✦";position:absolute;color:#c8a96a22;font-size:150px;top:12px}.hero:before{left:7%}.hero:after{right:7%}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.27em;font-size:10px;font-weight:700}.brand{font:600 clamp(42px,8vw,76px)/1.08 var(--serif);letter-spacing:-.035em;margin:14px 0 10px}.tagline{color:#d1c8b7;font:italic 17px var(--serif);margin:0 0 20px}.meta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:12px}.meta span:before{color:var(--gold);margin-right:7px}.meta .location:before{content:"⌖"}.meta .hours:before{content:"◷"}
+.hero-actions{display:flex;justify-content:center;gap:9px;margin-top:24px}.lang{border:1px solid #766443;background:transparent;color:var(--ink);padding:8px 15px;border-radius:30px;font-size:12px}.lang.active{background:var(--gold);color:#1b1a15;border-color:var(--gold);font-weight:700}
+.controls{position:sticky;top:0;z-index:20;background:#171714ed;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:13px max(18px,calc((100vw - 1120px)/2))}
+.searchrow{display:flex;gap:10px;max-width:1120px;margin:auto}.searchwrap{position:relative;flex:1}.searchwrap:before{content:"⌕";position:absolute;left:15px;top:7px;color:var(--gold);font-size:22px}.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px 12px 43px;color:var(--ink);outline:none}.search:focus{border-color:var(--gold)}.filters{display:flex;gap:8px;overflow-x:auto;padding:12px 0 1px;scrollbar-width:none}.filters::-webkit-scrollbar,.cats::-webkit-scrollbar{display:none}.chip,.cat{white-space:nowrap;border:1px solid var(--line);background:transparent;color:var(--muted);padding:7px 14px;border-radius:30px;font-size:11px;transition:.2s}.chip.active,.chip:hover,.cat.active{background:var(--gold);color:#1b1a15;border-color:var(--gold);font-weight:700}
+.cats{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:10px;padding-bottom:2px}.cat{padding:6px 12px}
+main{max-width:1120px;margin:0 auto;padding:42px 22px 90px}.intro{display:flex;justify-content:space-between;align-items:end;margin-bottom:34px;gap:20px}.intro h2{font:500 31px var(--serif);margin:0}.intro p{margin:6px 0 0;color:var(--muted);font-size:13px}.note{font-size:10px;color:var(--muted);text-align:right}
+.menu-section{margin:0 0 48px;scroll-margin-top:150px}.section-head{display:flex;align-items:center;gap:16px;margin-bottom:17px}.section-head h3{font:500 28px var(--serif);margin:0}.section-head .ar{color:var(--gold);font:18px 'Noto Naskh Arabic',serif}.rule{height:1px;background:var(--line);flex:1}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dish{display:flex;gap:15px;align-items:center;min-height:118px;padding:17px;background:linear-gradient(145deg,#24241f,#1d1d19);border:1px solid #34332c;border-radius:11px;transition:transform .2s,border-color .2s;cursor:pointer}.dish:hover{transform:translateY(-2px);border-color:#8b7447}.dishtext{flex:1;min-width:0}.dish-top{display:flex;align-items:start;justify-content:space-between;gap:12px}.dish h4{font:600 16px var(--serif);margin:0 0 5px}.price{white-space:nowrap;color:var(--gold);font-size:13px;font-weight:700}.desc{color:var(--muted);font-size:11px;line-height:1.5;margin:0}.arabic{font:13px 'Noto Naskh Arabic',serif;color:#c5ad7a;margin-top:3px}.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.badge{font-size:9px;text-transform:uppercase;letter-spacing:.06em;padding:3px 7px;border-radius:20px;color:#d8c69d;background:#c8a96a19;border:1px solid #c8a96a33}.dish-thumb{width:92px;height:86px;flex:none;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#4b412d,#29271f);display:grid;place-items:center;color:#c8a96a}.dish-thumb img{width:100%;height:100%;object-fit:cover;display:block}.dish-thumb.photo-fallback:after{content:"✦";font-size:25px}.modal-photo{width:100%;height:210px;object-fit:cover;border-radius:9px;margin:14px 0 5px;background:#353126}.dish-thumb img{transition:transform .35s}.dish:hover .dish-thumb img{transform:scale(1.06)}.empty{text-align:center;color:var(--muted);padding:60px 10px;display:none}
+footer{border-top:1px solid var(--line);padding:38px 22px 28px;text-align:center;background:#131310}.footerbrand{font:500 28px var(--serif);margin-bottom:8px}.footerinfo{color:var(--muted);font-size:12px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}.footerinfo a{color:var(--gold);text-decoration:none}.allergen{max-width:680px;margin:23px auto 0;color:#898477;font-size:10px}
+.overlay{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:center;justify-content:center;padding:18px}.overlay.open{display:flex}.modal{width:min(510px,100%);max-height:85vh;overflow:auto;background:#22221d;border:1px solid #665638;border-radius:15px;padding:26px;position:relative;box-shadow:0 24px 80px #0009}.close{position:absolute;right:16px;top:12px;border:0;background:none;color:var(--muted);font-size:25px}.modal-kicker{color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.2em}.modal h3{font:600 30px var(--serif);margin:9px 35px 8px 0}.modal .full-desc{color:#c2b9a9;font-size:13px}.modal-price{color:var(--gold);font-weight:700;font-size:18px;margin:17px 0}.modal-meta{border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:11px}.modal-ar{font:20px 'Noto Naskh Arabic',serif;color:var(--gold)}
+[dir=rtl] body,[dir=rtl] .dish{font-family:'Noto Naskh Arabic','DM Sans',sans-serif;text-align:right}[dir=rtl] .brand,[dir=rtl] .intro h2,[dir=rtl] .section-head h3,[dir=rtl] .dish h4,[dir=rtl] .modal h3{font-family:'Noto Naskh Arabic',serif}[dir=rtl] .dish{flex-direction:row-reverse}[dir=rtl] .dish-top{flex-direction:row-reverse}[dir=rtl] .searchwrap:before{left:auto;right:15px}[dir=rtl] .search{padding:12px 43px 12px 14px}[dir=rtl] .close{right:auto;left:16px}
+@media(max-width:680px){.dish-thumb{width:78px;height:78px}.modal-photo{height:180px}.hero{padding:42px 18px 27px}.hero:before,.hero:after{font-size:80px}.meta{gap:8px 15px}.controls{padding:10px 14px}.searchrow{gap:7px}.grid{grid-template-columns:1fr}.dish{min-height:104px;padding:14px}.dish-thumb{width:66px;height:66px}.intro{display:block}.note{text-align:left;margin-top:10px}.section-head h3{font-size:25px}main{padding:30px 15px 65px}}
+/* Modern sample-menu refresh */
+:root{--bg:#101714;--panel:#1a2420;--panel2:#202d27;--ink:#f7f7f1;--muted:#b3c0b8;--gold:#d8b879;--line:#304139;--serif:'Playfair Display',Georgia,serif}
+body{background:radial-gradient(ellipse at 50% 0%,#20372c 0,transparent 42%),var(--bg)}
+.hero{padding:68px 22px 44px;background:linear-gradient(135deg,#17241e 0%,#101714 72%);border-bottom:1px solid #35483d}
+.hero:before,.hero:after{color:#d8b87918}.eyebrow{letter-spacing:.32em}
+.brand{font-size:clamp(44px,8vw,82px);letter-spacing:-.045em}
+.tagline{font-size:18px;color:#d7ded8}.meta{font-size:12px}
+.lang{border-radius:999px;padding:9px 17px}.lang.active{box-shadow:0 5px 18px #d8b87930}
+.controls{background:#101714eF;border-bottom:1px solid #34453b;box-shadow:0 10px 30px #0002}
+.search{background:#1b2721;border-color:#35483d;border-radius:14px;padding-top:14px;padding-bottom:14px}
+.chip,.cat{border-radius:999px;padding:9px 16px;background:#1a251f;border-color:#35483d;color:#c4d0c7;font-size:12px}
+.chip.active,.chip:hover,.cat.active{background:var(--gold);color:#172019;border-color:var(--gold);box-shadow:0 4px 16px #d8b87924}
+main{padding-top:48px}.intro{margin-bottom:38px}.intro h2{font-size:clamp(29px,4vw,38px)}
+.note{background:#1b2821;border:1px solid #35483d;border-radius:12px;padding:10px 14px;color:#d7c49e;text-align:center}
+.menu-section{margin-bottom:54px}.section-head{margin-bottom:20px}.section-head h3{font-size:30px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dish{min-height:140px;padding:13px;background:linear-gradient(145deg,#1d2a23,#17211c);border:1px solid #314238;border-radius:17px;gap:16px;box-shadow:0 8px 24px #00000014}
+.dish:hover{transform:translateY(-4px);border-color:#a58b59;box-shadow:0 14px 30px #0003}
+.dish-thumb{width:112px;height:112px;border-radius:12px}.dish h4{font-size:17px}.desc{font-size:12px;line-height:1.6}.price{font-size:14px}
+.badge{border-radius:999px}footer{background:#0d1310;border-top-color:#304139}.footerbrand{font-size:30px}
+.modal{background:#1a251f;border-color:#8a754d;border-radius:20px;padding:24px}.modal-photo{height:240px;border-radius:14px}
+[dir=rtl] .note{text-align:center}
+@media(max-width:680px){.hero{padding:50px 18px 32px}.grid{grid-template-columns:1fr}.dish{min-height:116px}.dish-thumb{width:88px;height:88px}.note{display:inline-block;margin-top:13px}.intro{margin-bottom:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+/* Category strip follows the active language: English starts on the left, Arabic on the right. */
+.cats{direction:ltr;display:flex;flex-direction:row;justify-content:flex-start;flex-wrap:nowrap;gap:9px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin;scrollbar-color:var(--gold) #26342c;scroll-behavior:smooth;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x;margin-top:0;padding:10px 2px 9px;}
+.cats .cat[data-category="All"]{order:-1;}
+.cats::-webkit-scrollbar{display:block;height:6px}
+.cats::-webkit-scrollbar-track{background:#26342c;border-radius:20px}
+.cats::-webkit-scrollbar-thumb{background:var(--gold);border-radius:20px}
+.cats::-webkit-scrollbar-thumb:hover{background:#efd49a}
+.cat{direction:ltr;flex:0 0 auto;padding:10px 18px;font-size:12px;font-weight:600}
+[dir=rtl] .cat{direction:rtl}
+.cat.active{background:var(--gold);color:#172019;border-color:var(--gold)}.copyright{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);color:#a7b2aa;font-size:11px;letter-spacing:.04em}.menu-section[hidden]{display:none!important}
+
+/* Luxury editorial refresh — warm, rich and food-forward */
+:root{
+ --bg:#17110e;--panel:#241914;--panel2:#302119;--ink:#fff8ed;--muted:#c5b5a5;
+ --gold:#d6ad68;--line:#493329;--serif:'Playfair Display',Georgia,serif;
+}
+html{scroll-padding-top:160px}
+body{background:radial-gradient(ellipse at 50% -8%,#53331f 0%,transparent 43%),linear-gradient(180deg,#1d1410 0%,#120e0c 100%);color:var(--ink)}
+.hero{padding:76px 22px 54px;background:linear-gradient(180deg,#291a13eF 0%,#1b120f 100%);border-bottom:1px solid #61452f;isolation:isolate}
+.hero:before,.hero:after{content:"✦";color:#e2bd7a20;font-size:clamp(100px,18vw,190px);top:18px;z-index:-1}
+.eyebrow{color:#e6c58e;letter-spacing:.38em;font-size:10px}
+.brand{font-size:clamp(48px,8vw,88px);letter-spacing:-.055em;text-shadow:0 8px 30px #0008;margin:17px 0 12px}
+.tagline{font-size:clamp(17px,2vw,21px);color:#e8d8c5}
+.meta{color:#cdbba7}.meta span:before{color:var(--gold)}
+.lang{border-color:#87653e;background:#241810;color:#f8eddf;padding:10px 19px}.lang.active{background:linear-gradient(135deg,#f0d49b,#c49a58);color:#24160e;border-color:#e6c58e;box-shadow:0 7px 24px #d6ad6830}
+.controls{background:#17100eF2;border-bottom:1px solid #5a3e2b;box-shadow:0 12px 35px #0005;padding-top:14px;padding-bottom:13px}
+.search{background:#281b15;border:1px solid #59402f;border-radius:999px;color:#fff6e9;padding-top:14px;padding-bottom:14px}
+.search:focus{border-color:#dfb875;box-shadow:0 0 0 3px #d6ad681c}
+.searchwrap:before{color:#dfb875;top:8px}
+.filters{padding-top:13px}.chip,.cat{background:#251812;border-color:#604631;color:#dfcbb5;border-radius:999px;padding:9px 17px;font-size:12px}
+.chip.active,.chip:hover,.cat.active{background:linear-gradient(135deg,#f0d49b,#c79b5a);color:#24160e;border-color:#e7c78d;box-shadow:0 5px 18px #d6ad6826}
+.cats{padding:12px 0 8px;scrollbar-width:thin;scrollbar-color:#b78b50 #2a1b14;direction:ltr}
+.cats::-webkit-scrollbar{display:block;height:5px}.cats::-webkit-scrollbar-track{background:#2a1b14;border-radius:10px}.cats::-webkit-scrollbar-thumb{background:#b78b50;border-radius:10px}
+main{padding-top:55px;padding-bottom:100px}
+.intro{margin-bottom:42px}.intro h2{font-size:clamp(32px,4vw,43px);letter-spacing:-.025em}.intro p{color:#cbb9a7;font-size:14px}
+.note{background:#2b1b14;border:1px solid #65482f;border-radius:999px;padding:10px 16px;color:#e8c98e}
+.menu-section{margin-bottom:62px}.section-head{margin-bottom:22px;gap:18px}.section-head h3{font-size:clamp(27px,3vw,34px);color:#fff4e5}.section-head .ar{color:#e0bd82}.rule{background:linear-gradient(90deg,#6a4b32,transparent);height:1px}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
+.dish{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;min-height:0;overflow:hidden;background:linear-gradient(160deg,#302119,#211611);border:1px solid #513827;border-radius:18px;box-shadow:0 12px 30px #0003;transition:transform .28s,border-color .28s,box-shadow .28s}
+.dish:hover{transform:translateY(-6px);border-color:#bd9257;box-shadow:0 20px 38px #0006}
+.dish-thumb{width:100%;height:clamp(155px,17vw,205px);border-radius:0;background:#3b291d;position:relative;overflow:hidden}
+.dish-thumb:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(180deg,transparent,#160e0b55);pointer-events:none}
+.dish-thumb img{object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.dish:hover .dish-thumb img{transform:scale(1.08)}
+.dishtext{padding:17px 18px 19px;width:100%}
+.dish-top{align-items:flex-start;gap:9px}.dish h4{font-size:18px;line-height:1.25;color:#fff6e9}.price{color:#e8c17f;font-size:14px;font-weight:700;letter-spacing:.02em}
+.desc{font-size:12px;line-height:1.65;color:#cbb8a6;min-height:39px}.arabic{color:#e0bd82}.badges{margin-top:11px}.badge{background:#d6ad681c;border-color:#b98e523f;color:#e8ca91;padding:4px 9px}
+.empty{padding:75px 10px;color:#d0bba5}
+footer{background:linear-gradient(180deg,#17100d,#0f0b09);border-top:1px solid #503725;padding:48px 22px 30px}.footerbrand{font-size:34px;color:#f8e9d5}.footerinfo{color:#c6b29e}.footerinfo a{color:#e5bd7b}.allergen{color:#9e8b78;line-height:1.8}
+.overlay{background:#090604d9;backdrop-filter:blur(7px)}.modal{background:linear-gradient(145deg,#302016,#1c120e);border:1px solid #9b7546;border-radius:22px;box-shadow:0 30px 100px #000b;padding:25px}.modal-photo{height:270px;border-radius:15px;margin:15px 0 9px}.modal-kicker{color:#e7c17f}.modal h3{color:#fff5e7}.modal .full-desc{color:#d3c0ad}.modal-price{color:#edc982}.modal-meta{border-color:#62462f;color:#c6b29e}
+[dir=rtl] .cats{direction:rtl}
+[dir=rtl] .dish{flex-direction:column}
+[dir=rtl] .dish-top{flex-direction:row-reverse}
+[dir=rtl] .rule{background:linear-gradient(270deg,#6a4b32,transparent)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dish-thumb{height:190px}}
+@media(max-width:600px){.hero{padding:52px 18px 35px}.grid{grid-template-columns:1fr;gap:15px}.dish{display:grid;grid-template-columns:112px minmax(0,1fr);align-items:stretch;min-height:132px}.dish-thumb{width:112px;height:100%;min-height:132px}.dishtext{padding:14px 13px}.dish h4{font-size:16px}.desc{font-size:11px;min-height:0}.dish-top{gap:7px}.price{font-size:12px}.intro{margin-bottom:30px}.note{display:inline-block;margin-top:12px}.modal-photo{height:205px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+
+.reading-progress{position:fixed;top:0;left:0;z-index:100;width:0;height:2px;background:linear-gradient(90deg,#a87942,#f1d69f);box-shadow:0 0 12px #d9b77988;pointer-events:none}
+/* ─────────────────────────────────────────────────────────────
+  
+   ───────────────────────────────────────────────────────────── */
+:root{
+  --bg:#100d0a;--panel:#1c1510;--panel2:#261b13;--ink:#fff8ee;
+  --muted:#c1ad98;--gold:#d9b779;--line:#493629;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',Arial,sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:172px}
+body{
+  background:
+    radial-gradient(ellipse at 50% -15%,rgba(133,83,43,.22),transparent 48%),
+    radial-gradient(ellipse at 100% 45%,rgba(83,48,25,.10),transparent 35%),
+    #100d0a;
+  color:var(--ink);font-family:var(--sans);letter-spacing:.005em;
+}
+::selection{background:#d9b779;color:#17100a}
+.hero{
+  min-height:430px;padding:76px 22px 54px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;isolation:isolate;
+  background:
+    linear-gradient(180deg,rgba(15,10,7,.42),rgba(16,11,8,.92)),
+    linear-gradient(110deg,rgba(23,14,9,.94),rgba(42,26,16,.56),rgba(17,11,8,.94)),
+    url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=88') center 52%/cover;
+  border-bottom:1px solid rgba(217,183,121,.34);
+  position:relative;
+}
+.hero:before,.hero:after{content:"✧";color:#f0d6a322;font-size:clamp(110px,18vw,220px);top:50%;transform:translateY(-50%);z-index:-1}
+.hero:before{left:clamp(10px,8vw,130px)}.hero:after{right:clamp(10px,8vw,130px)}
+.hero:after{content:"✧"}
+.eyebrow{color:#e6c994;letter-spacing:.42em;font-size:10px}
+.brand{
+  font-size:clamp(52px,9vw,100px);line-height:1.02;letter-spacing:-.06em;
+  margin:20px 0 14px;text-shadow:0 8px 38px #000b;
+}
+.tagline{font-size:clamp(17px,2vw,22px);color:#f0e1ce;letter-spacing:.015em}
+.meta{gap:12px 25px;color:#e0cdb7;font-size:11px;letter-spacing:.07em}
+.meta span{padding:4px 0}
+.hero-actions{margin-top:28px}
+.lang{
+  min-width:104px;padding:11px 20px;border:1px solid #b18a52;
+  background:rgba(24,15,10,.62);backdrop-filter:blur(10px);
+  color:#f7ead7;letter-spacing:.08em;text-transform:uppercase;font-size:10px;
+  transition:background .25s,transform .25s,box-shadow .25s;
+}
+.lang:hover{transform:translateY(-2px)}
+.lang.active{background:linear-gradient(135deg,#f0d7a5,#c69b5d);color:#21150d;border-color:#f0d7a5;box-shadow:0 8px 25px #d9b77930}
+.controls{
+  position:sticky;top:0;z-index:30;padding:14px max(20px,calc((100vw - 1180px)/2));
+  background:rgba(16,12,9,.91);backdrop-filter:blur(22px) saturate(140%);
+  border-bottom:1px solid rgba(217,183,121,.22);box-shadow:0 12px 35px #0005;
+}
+.searchrow{max-width:1180px}
+.search{
+  border:1px solid #59422e;background:linear-gradient(135deg,#251a13,#1a120e);
+  border-radius:999px;padding:15px 18px 15px 47px;color:#fff7ed;
+  font-size:13px;transition:border-color .25s,box-shadow .25s;
+}
+.search:focus{border-color:#d9b779;box-shadow:0 0 0 4px #d9b77918}
+.searchwrap:before{left:17px;top:9px;color:#d9b779}
+.cats{gap:9px;padding:13px 1px 8px;scrollbar-color:#9c7544 #2a1c13}
+.cats::-webkit-scrollbar{height:4px}
+.cats::-webkit-scrollbar-track{background:#2a1c13}
+.cats::-webkit-scrollbar-thumb{background:#a9824d}
+.cat{
+  padding:10px 18px;background:rgba(44,29,19,.72);border:1px solid #5a402c;
+  color:#e1cdb7;font-size:11px;letter-spacing:.035em;
+  transition:all .22s ease;
+}
+.cat:hover{transform:translateY(-1px);border-color:#d9b779;color:#fff1d9}
+.cat.active{background:linear-gradient(135deg,#f0d7a5,#c69b5d);border-color:#f0d7a5;color:#21150d;box-shadow:0 5px 18px #d9b77928}
+main{max-width:1220px;padding:64px 26px 112px}
+.intro{align-items:center;margin-bottom:48px}
+.intro>div:first-child:before{
+  content:"THE ART OF GOOD FOOD";display:block;margin-bottom:12px;
+  color:#d9b779;font-size:9px;font-weight:700;letter-spacing:.34em;
+}
+.intro h2{font-size:clamp(34px,4.2vw,48px);letter-spacing:-.04em}
+.intro p{font-size:14px;color:#cbb8a5;margin-top:10px}
+.note{background:#21160f;border:1px solid #65482f;border-radius:999px;padding:11px 17px;color:#e7c78f;font-size:10px;letter-spacing:.035em}
+.menu-section{margin-bottom:76px;scroll-margin-top:174px}
+.section-head{gap:20px;margin-bottom:26px}
+.section-head h3{font-size:clamp(29px,3vw,37px);letter-spacing:-.035em}
+.section-head .ar{font-size:19px;color:#d9b779}
+.rule{height:1px;background:linear-gradient(90deg,#9a7044,rgba(154,112,68,0))}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.dish{
+  position:relative;border:1px solid rgba(177,133,82,.28);border-radius:5px;
+  background:linear-gradient(155deg,#2a1d14 0%,#1a120e 100%);
+  box-shadow:0 14px 35px rgba(0,0,0,.22);overflow:hidden;
+  transition:transform .42s cubic-bezier(.2,.75,.25,1),border-color .3s,box-shadow .4s;
+}
+.dish:after{content:"";position:absolute;inset:0;border:1px solid transparent;pointer-events:none;transition:border-color .3s}
+.dish:hover{transform:translateY(-7px);border-color:#bd965f;box-shadow:0 24px 48px #0007}
+.dish:hover:after{border-color:#d9b77955}
+.dish-thumb{height:clamp(175px,18vw,225px);background:#35251a}
+.dish-thumb:after{inset:48% 0 0;background:linear-gradient(180deg,transparent,rgba(17,10,7,.42))}
+.dish-thumb img{filter:saturate(.92) contrast(1.04);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
+.dish:hover .dish-thumb img{transform:scale(1.075);filter:saturate(1.08) contrast(1.06)}
+.dishtext{padding:19px 20px 21px}
+.dish-top{align-items:flex-start;gap:12px}
+.dish h4{font-size:19px;line-height:1.22;letter-spacing:-.015em}
+.price{color:#e7c17f;font-size:14px;padding-top:2px}
+.desc{font-size:12px;line-height:1.75;color:#c9b6a2;min-height:43px;margin-top:9px}
+.badges{margin-top:13px}
+.badge{background:rgba(217,183,121,.09);border:1px solid rgba(217,183,121,.3);color:#e6c994;font-size:8px;letter-spacing:.13em;padding:5px 9px}
+.empty{padding:90px 10px;color:#d5c0a9}
+footer{
+  background:linear-gradient(180deg,#17100c,#0b0806);border-top:1px solid #59402b;
+  padding:58px 22px 30px;
+}
+.footerbrand{font-size:38px;letter-spacing:-.04em}
+.footerinfo{gap:12px 28px;color:#cdb8a1}
+.footerinfo span{font-size:11px;letter-spacing:.035em}
+.footerinfo a{color:#e5bd7b}
+.allergen{max-width:720px;color:#988675;font-size:10px;line-height:1.9}
+.copyright{border-color:#3b2a1d;color:#9c8977;letter-spacing:.13em;font-size:9px}
+.overlay{background:rgba(7,5,4,.82);backdrop-filter:blur(12px)}
+.modal{
+  background:linear-gradient(145deg,#302116,#17100c);border:1px solid #9b7546;
+  border-radius:7px;box-shadow:0 35px 110px #000d;padding:28px;
+  animation:modalIn .32s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-photo{height:285px;border-radius:4px}
+.modal h3{font-size:34px}
+.modal-kicker{letter-spacing:.28em}
+.close{width:36px;height:36px;border:1px solid #755638;border-radius:50%;color:#e6c994;transition:background .2s,transform .2s}
+.close:hover{background:#49311e;transform:rotate(90deg)}
+[dir=rtl] .hero:before{left:auto;right:8vw}[dir=rtl] .hero:after{right:auto;left:8vw}
+[dir=rtl] .intro>div:first-child:before{letter-spacing:.12em}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+  .dish-thumb{height:190px}
+}
+@media(max-width:600px){
+  .hero{min-height:360px;padding:52px 18px 38px;background-position:center}
+  .hero:before,.hero:after{font-size:82px}
+  .brand{font-size:clamp(48px,13vw,68px)}
+  .meta{font-size:10px;gap:5px 14px}
+  .controls{padding:10px 14px}
+  .search{padding-top:13px;padding-bottom:13px}
+  .cats{padding-top:10px;gap:7px}
+  .cat{padding:9px 14px;font-size:10px}
+  main{padding:42px 16px 75px}
+  .intro{margin-bottom:35px}
+  .note{display:inline-block;margin-top:15px}
+  .menu-section{margin-bottom:52px}
+  .grid{grid-template-columns:1fr;gap:14px}
+  .dish{display:grid;grid-template-columns:116px minmax(0,1fr);min-height:138px}
+  .dish-thumb{width:116px;height:100%;min-height:138px}
+  .dishtext{padding:15px 14px}
+  .dish h4{font-size:16px}
+  .desc{font-size:10px;line-height:1.55;min-height:0;margin-top:7px}
+  .price{font-size:12px}
+  .badge{font-size:7px}
+  footer{padding:43px 18px 25px}
+  .footerbrand{font-size:32px}
+  .modal{padding:20px}
+  .modal-photo{height:205px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+</style>
+</head>
+<body>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+<header class="hero">
+  <div class="eyebrow" data-en="A taste of Lebanese hospitality" data-ar="نكهة من كرم الضيافة اللبنانية">A taste of Lebanese hospitality</div>
+  <h1 class="brand">Restaurant Name</h1><p class="tagline" data-en="Restaurant · Gather around good food" data-ar="مطعم · نجتمع حول الطعام الطيب">Restaurant · Gather around good food</p>
+  <div class="meta"><span class="location" data-en="Your dining destination" data-ar="وجهتكم لتجربة طعام مميزة">Your dining destination</span><span class="hours" data-en="Please ask our team for today's hours" data-ar="يرجى سؤال فريقنا عن ساعات العمل">Please ask our team for today's hours</span></div>
+  <div class="hero-actions"><button class="lang active" data-lang="en">English</button><button class="lang" data-lang="ar">العربية</button></div>
+</header>
+<div class="controls">
+  <div class="searchrow"><div class="searchwrap"><input class="search" id="search" type="search" placeholder="Search dishes or ingredients…" aria-label="Search menu"></div></div>
+  <nav class="cats" id="cats" aria-label="Menu categories"></nav>
+</div>
+<main>
+  <div class="intro"><div><h2 data-en="Discover our menu" data-ar="اكتشفوا قائمتنا">Discover our menu</h2><p data-en="Made to be shared. Best enjoyed together." data-ar="أطباق صُنعت للمشاركة، وأطيب مع الأحبة.">Made to be shared. Best enjoyed together.</p></div><div class="note">Prices and pictures are examples.</div></div>
+  <div id="menu"></div><div class="empty" id="empty">No dishes found. Try another search.</div>
+</main>
+<footer><div class="footerbrand">Restaurant Name</div><div class="footerinfo"><span>Restaurant location — confirm address</span><span><a href="tel:+0000000000">Add restaurant phone</a></span><span>Social links — add official profiles</span></div><p class="allergen">Please inform our team of any food allergies or dietary requirements. Menu descriptions are indicative; ingredients and preparation may vary. Prices and contact details must be verified with the restaurant before going live.</p><div class="copyright">© <span id="year"></span> Webnest | Ali Alfakih</div></footer>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><button class="close" id="close" aria-label="Close" data-close-en="Close" data-close-ar="إغلاق">×</button><div class="modal-kicker" id="modalCategory">AL JAWAD MENU</div><img class="modal-photo" id="modalPhoto" alt="" loading="lazy"><h3 id="modalTitle"></h3><div class="modal-ar" id="modalAr"></div><p class="full-desc" id="modalDesc"></p><div class="modal-price" id="modalPrice"></div><div class="modal-meta" id="modalMeta">Ask our team about ingredients, allergens and portion sizes.</div></div></div>
+<script>
+/* i will Replace the sample entries/prices below with the restaurant's verified menu export. */
+const menuData = [
+ {category:"Cold Mezza",arCategory:"مقبلات باردة",items:[
+  ["Hummus","حمّص","Chickpeas blended with tahini, lemon and olive oil.","Chickpeas, tahini, sesame, lemon",6,"Vegetarian"],
+  ["Moutabal","متبّل","Smoky grilled eggplant folded with tahini and lemon.","Eggplant, tahini, sesame, lemon",7,"Vegetarian"],
+  ["Tabbouleh","تبولة","A bright parsley salad with tomato, mint and fine bulgur.","Parsley, tomato, mint, bulgur, lemon",7,"Vegetarian"],
+  ["Fattoush","فتوش","Crisp garden vegetables, herbs and toasted pita with sumac dressing.","Lettuce, tomato, cucumber, pita, sumac",8,"Vegetarian"],
+  ["Warak Enab","ورق عنب","Tender vine leaves rolled with a fragrant rice and herb filling.","Vine leaves, rice, herbs, lemon",8,"Vegetarian"]
+ ]},
+ {category:"Hot Mezza",arCategory:"مقبلات ساخنة",items:[
+  ["Falafel","فلافل","Golden chickpea and herb fritters, crisp outside and tender within.","Chickpeas, herbs, sesame sauce",7,"Vegetarian"],
+  ["Kibbeh","كبة","Traditional bulgur shells filled with seasoned minced meat.","Bulgur, beef, onion, spices",9,"Popular"],
+  ["Cheese Rolls","رقاقات جبنة","Crisp pastry rolls with a warm cheese filling.","Pastry, cheese, herbs",8,"Popular"],
+  ["Sujuk","سجق","Spiced Lebanese sausage sautéed with peppers and tomato.","Sujuk, peppers, tomato",10,"Spicy"]
+ ]},
+ {category:"Grills",arCategory:"مشاوي",items:[
+  ["Mixed Grill","مشاوي مشكلة","A generous selection of charcoal-grilled kebab, tawouk and lamb.","Beef, chicken, lamb, spices",24,"Popular"],
+  ["Shish Tawouk","شيش طاووق","Marinated chicken skewers grilled over charcoal.","Chicken, garlic, lemon, yogurt",18,""],
+  ["Kafta","كفتة","Seasoned minced meat with parsley and onion, charcoal grilled.","Beef or lamb, parsley, onion",19,""],
+  ["Lamb Chops","ريش غنم","Tender lamb chops grilled and finished with house seasoning.","Lamb, spices",29,"Chef's Special"]
+ ]},
+ {category:"Seafood",arCategory:"مأكولات بحرية",items:[
+  ["Grilled Sea Bass","قاروص مشوي","Whole sea bass grilled with lemon, herbs and olive oil.","Sea bass, lemon, herbs",26,""],
+  ["Grilled Shrimp","روبيان مشوي","Juicy shrimp grilled with garlic, lemon and herbs.","Shrimp, garlic, lemon",24,""]
+ ]},
+ {category:"Sandwiches",arCategory:"سندويشات",items:[
+  ["Tawouk Sandwich","سندويش طاووق","Garlic-marinated chicken with pickles and creamy toum.","Chicken, garlic, pickles, pita",9,""],
+  ["Kafta Sandwich","سندويش كفتة","Charcoal-grilled kafta wrapped with fresh vegetables.","Beef or lamb, parsley, pita",10,""],
+  ["Falafel Sandwich","سندويش فلافل","Crisp falafel with fresh vegetables and tahini.","Chickpeas, tahini, vegetables",7,"Vegetarian"]
+ ]},
+ {category:"Desserts",arCategory:"حلويات",items:[
+  ["Knefeh","كنافة","Warm cheese pastry with fragrant syrup.","Cheese, semolina, syrup",8,"Popular"],
+  ["Baklava","بقلاوة","Layers of delicate pastry, nuts and light syrup.","Wheat, pistachio or walnut, butter",7,""]
+ ]},
+ {category:"Beverages",arCategory:"مشروبات",items:[
+  ["Fresh Lemonade","ليموناضة","Freshly squeezed lemon with a hint of mint.","Lemon, mint",5,""],
+  ["Jallab","جلّاب","A traditional chilled drink with date and grape molasses.","Date molasses, grape molasses, pine nuts",5,""],
+  ["Lebanese Coffee","قهوة لبنانية","Traditional finely ground coffee, served warm.","Coffee",3,""]
+ ]}
+];
+// A dedicated food photo is assigned to every sample dish. If a source image fails,
+// the card keeps a styled food-photo fallback instead of showing an empty space.
+const dishPhotos = {
+ "Hummus":"photo-1577805947697-89e3d6f2c2e7", "Moutabal":"photo-1601050690597-df0568f70950",
+ "Tabbouleh":"photo-1512621776951-a57141f2eefd", "Fattoush":"photo-1540420773420-3366772f4999",
+ "Warak Enab":"photo-1547592180-85f173990554", "Falafel":"photo-1593001874117-c99c800e3eb9",
+ "Kibbeh":"photo-1601050690117-94f5f6fa8bd7", "Cheese Rolls":"photo-1541518763669-27fef9b7b7b5",
+ "Sujuk":"photo-1544025162-d76694265947", "Mixed Grill":"photo-1558030006-450675393462",
+ "Shish Tawouk":"photo-1532550907401-a500c9a57435", "Kafta":"photo-1544025162-d76694265947",
+ "Lamb Chops":"photo-1529193591184-b1d58069ecdd", "Grilled Sea Bass":"photo-1519708227418-c8fd9a32b7a2",
+ "Grilled Shrimp":"photo-1565680018434-b513d5e5fd47", "Tawouk Sandwich":"photo-1553909489-cd47e0ef937f",
+ "Kafta Sandwich":"photo-1528735602780-2552fd46c7af", "Falafel Sandwich":"photo-1529006557810-274b9b2fc783",
+ "Knefeh":"photo-1578985545062-69928b1d9587", "Baklava":"photo-1519676867240-f03562e64548",
+ "Fresh Lemonade":"photo-1513558161293-cdec7e7b8a4", "Jallab":"photo-1544145945-f90425340c7e",
+ "Lebanese Coffee":"photo-1495474472287-4d71bcdd2085"
+};
+const fallbackPhoto="photo-1547592180-85f173990554";
+function photoFor(item){
+ const id=dishPhotos[item[0]]||fallbackPhoto;
+ return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=700&q=85`;
+}
+function setPhotoFallback(img){
+ if(img.dataset.fallbackTried){img.style.display='none';img.parentElement.classList.add('photo-fallback');return;}
+ img.dataset.fallbackTried='1';
+ img.onerror=()=>{img.style.display='none';img.parentElement.classList.add('photo-fallback');};
+ img.src=`https://images.unsplash.com/${fallbackPhoto}?auto=format&fit=crop&w=700&q=80`;
+}
+const arabicCopy = {
+ "Hummus":["حمص ناعم ممزوج بالطحينة والليمون وزيت الزيتون.","حمص، طحينة، سمسم، ليمون"],
+ "Moutabal":["باذنجان مشوي بنكهة مدخنة ممزوج بالطحينة والليمون.","باذنجان، طحينة، سمسم، ليمون"],
+ "Tabbouleh":["سلطة بقدونس منعشة مع الطماطم والنعناع والبرغل الناعم.","بقدونس، طماطم، نعناع، برغل، ليمون"],
+ "Fattoush":["خضروات طازجة وأعشاب مع خبز محمص وصلصة السماق.","خس، طماطم، خيار، خبز، سماق"],
+ "Warak Enab":["أوراق عنب طرية محشوة بالأرز والأعشاب.","ورق عنب، أرز، أعشاب، ليمون"],
+ "Falafel":["أقراص حمص وأعشاب ذهبية ومقرمشة من الخارج وطرية من الداخل.","حمص، أعشاب، صلصة طحينة"],
+ "Kibbeh":["قوالب برغل تقليدية محشوة باللحم المفروم المتبل.","برغل، لحم بقري، بصل، بهارات"],
+ "Cheese Rolls":["رقاقات عجين مقرمشة بحشوة الجبن الساخنة.","عجين، جبنة، أعشاب"],
+ "Sujuk":["نقانق لبنانية متبلة ومقلية مع الفليفلة والطماطم.","سجق، فليفلة، طماطم"],
+ "Mixed Grill":["تشكيلة سخية من الكباب والطاووق واللحم المشوي على الفحم.","لحم بقري، دجاج، لحم غنم، بهارات"],
+ "Shish Tawouk":["أسياخ دجاج متبلة ومشوية على الفحم.","دجاج، ثوم، ليمون، لبن"],
+ "Kafta":["لحم مفروم متبل مع البقدونس والبصل ومشوي على الفحم.","لحم بقري أو غنم، بقدونس، بصل"],
+ "Lamb Chops":["ريش غنم طرية مشوية ومتبلّة بتوابل المطعم.","لحم غنم، بهارات"],
+ "Grilled Sea Bass":["سمكة قاروص كاملة مشوية مع الليمون والأعشاب وزيت الزيتون.","قاروص، ليمون، أعشاب"],
+ "Grilled Shrimp":["روبيان طري مشوي مع الثوم والليمون والأعشاب.","روبيان، ثوم، ليمون"],
+ "Tawouk Sandwich":["دجاج متبل بالثوم مع المخلل وصلصة الثوم الكريمية.","دجاج، ثوم، مخلل، خبز عربي"],
+ "Kafta Sandwich":["كفتة مشوية على الفحم ملفوفة مع الخضروات الطازجة.","لحم بقري أو غنم، بقدونس، خبز عربي"],
+ "Falafel Sandwich":["فلافل مقرمشة مع الخضروات الطازجة والطحينة.","حمص، طحينة، خضروات"],
+ "Knefeh":["كنافة بالجبنة تقدم دافئة مع القطر العطري.","جبنة، سميد، قطر"],
+ "Baklava":["طبقات رقيقة من العجين المحشو بالمكسرات والقطر الخفيف.","قمح، فستق أو جوز، زبدة"],
+ "Fresh Lemonade":["عصير ليمون طازج مع لمسة من النعناع.","ليمون، نعناع"],
+ "Jallab":["مشروب تقليدي بارد بدبس التمر والعنب.","دبس تمر، دبس عنب، صنوبر"],
+ "Lebanese Coffee":["قهوة لبنانية تقليدية مطحونة ناعماً وتقدم ساخنة.","قهوة"]
+};
+const translations = {
+ searchEmpty:"لم يتم العثور على أطباق. جرّب البحث بكلمات أخرى.",
+ menuTitle:"اكتشفوا قائمتنا", menuSub:"أطباق صُنعت للمشاركة، وأطيب مع الأحبة.",
+ note:"الأسعار والصور هي أمثلة توضيحية.",
+ address:"عنوان المطعم — يرجى إضافة العنوان الصحيح", phone:"أضف رقم هاتف المطعم",
+ socials:"روابط التواصل الاجتماعي — أضف الحسابات الرسمية",
+ allergen:"يرجى إبلاغ فريقنا عن أي حساسية أو متطلبات غذائية. الأوصاف إرشادية وقد تختلف المكونات وطرق التحضير. يجب التأكد من الأسعار وبيانات التواصل مع المطعم قبل النشر.",
+ modalMeta:"يرجى سؤال فريقنا عن المكونات ومسببات الحساسية وأحجام الحصص.",
+ badges:{"Vegetarian":"نباتي","Popular":"الأكثر طلباً","Spicy":"حار","Chef's Special":"اختيار الشيف"},
+ filters:{"All":"الكل","Grills":"مشاوي","Mezza":"مقبلات","Vegetarian":"نباتي","Seafood":"مأكولات بحرية"}
+};
+const categoryOptions=[
+ ["All","الكل"],["Grills","مشاوي"],["Mezza","مقبلات"],["Vegetarian","نباتي"],
+ ["Seafood","مأكولات بحرية"],["Snacks","وجبات خفيفة"],["Desserts","حلويات"],
+ ["Beverages","مشروبات"],["Salad","سلطات"]
+];
+let lang="en",query="",selectedCategory="All";
+const $=s=>document.querySelector(s);
+function money(n){return "$"+Number(n).toFixed(2)}
+function categoryMatches(category,item){
+ switch(selectedCategory){
+  case "All": return true;
+  case "Grills": return category==="Grills";
+  case "Mezza": return category==="Cold Mezza"||category==="Hot Mezza";
+  case "Vegetarian": return item[5]==="Vegetarian";
+  case "Seafood": return category==="Seafood";
+  case "Snacks": return category==="Sandwiches";
+  case "Desserts": return category==="Desserts";
+  case "Beverages": return category==="Beverages";
+  case "Salad": return ["Tabbouleh","Fattoush"].includes(item[0]);
+  default:return false;
+ }
+}
+function renderCats(){
+ $("#cats").innerHTML=categoryOptions.map(([en,ar])=>`<button class="cat ${selectedCategory===en?'active':''}" data-category="${en}" aria-pressed="${selectedCategory===en}">${lang==="en"?en:ar}</button>`).join("");
+ $("#cats").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+  selectedCategory=b.dataset.category;renderMenu();
+  document.querySelector('.controls').scrollIntoView({behavior:'smooth',block:'start'});
+ });
+}
+function renderMenu(){
+ let count=0,out="";
+ menuData.forEach((cat,i)=>{
+  const items=cat.items.filter(item=>categoryMatches(cat.category,item)&&[
+   item[0],item[1],item[2],item[3],(arabicCopy[item[0]]||[]).join(" "),cat.category,cat.arCategory
+  ].join(" ").toLowerCase().includes(query));
+  if(!items.length)return;count+=items.length;
+  const title=lang==="en"?cat.category:cat.arCategory;
+  out+=`<section class="menu-section" id="section-${i}"><div class="section-head"><h3>${title}</h3><span class="ar">${lang==="en"?cat.arCategory:""}</span><div class="rule"></div></div><div class="grid">`;
+  items.forEach(item=>{const originalIndex=cat.items.indexOf(item);out+=`<article class="dish" tabindex="0" role="button" data-cat="${i}" data-item="${originalIndex}" aria-label="View ${item[0]}"><div class="dish-thumb"><img src="${photoFor(item)}" alt="${lang==="en"?item[0]:item[1]}" loading="lazy" onerror="setPhotoFallback(this)"></div><div class="dishtext"><div class="dish-top"><h4>${lang==="en"?item[0]:item[1]}</h4><span class="price">${money(item[4])}</span></div><p class="desc">${lang==="en"?item[2]:(arabicCopy[item[0]]||[item[2],item[3]])[0]}</p><div class="badges">${item[5]?`<span class="badge">${lang==="en"?item[5]:(translations.badges[item[5]]||item[5])}</span>`:""}</div></div></article>`});
+  out+="</div></section>";
+ });
+ $("#menu").innerHTML=out;$("#empty").textContent=lang==="en"?"No dishes found. Try another search.":translations.searchEmpty;$("#empty").style.display=count?"none":"block";
+ document.querySelectorAll(".dish").forEach(card=>{const open=()=>showDish(+card.dataset.cat,+card.dataset.item);card.onclick=open;card.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}}});
+ renderCats();
+}
+function showDish(ci,ii){
+ const c=menuData[ci],it=c.items[ii];$("#modalPhoto").dataset.fallbackTried="";$("#modalPhoto").onerror=()=>setPhotoFallback($("#modalPhoto"));$("#modalPhoto").src=photoFor(it);$("#modalPhoto").alt=lang==="en"?it[0]:it[1];$("#modalCategory").textContent=lang==="en"?c.category:c.arCategory;$("#modalTitle").textContent=lang==="en"?it[0]:it[1];$("#modalAr").textContent=lang==="en"?it[1]:"";$("#modalDesc").textContent=lang==="en"?it[2]:(arabicCopy[it[0]]||[it[2],it[3]])[0];$("#modalPrice").textContent=money(it[4]);$("#modalMeta").textContent=(lang==="en"?"Ingredients (indicative): ":"المكونات (للاسترشاد): ")+(lang==="en"?it[3]:(arabicCopy[it[0]]||[it[2],it[3]])[1])+(lang==="en"?". Ask our team to confirm allergens and portion sizes.":". يرجى سؤال فريقنا عن مسببات الحساسية وأحجام الحصص.");$("#overlay").classList.add("open");$("#close").focus();
+}
+$("#close").onclick=()=>$("#overlay").classList.remove("open");$("#overlay").onclick=e=>{if(e.target.id==="overlay")$("#overlay").classList.remove("open")};document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#overlay").classList.remove("open")});
+$("#search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();renderMenu()});
+document.querySelectorAll(".lang").forEach(b=>b.onclick=()=>{
+ lang=b.dataset.lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));
+ document.querySelectorAll("[data-en]").forEach(el=>el.textContent=el.dataset[lang]);
+ $("#search").placeholder=lang==="en"?"Search dishes or ingredients…":"ابحث عن الأطباق أو المكونات…";
+ $("#search").setAttribute("aria-label",lang==="en"?"Search menu":"ابحث في القائمة");
+ document.querySelector(".intro h2").textContent=lang==="en"?"Discover our menu":translations.menuTitle;
+ document.querySelector(".intro p").textContent=lang==="en"?"Made to be shared. Best enjoyed together.":translations.menuSub;
+ document.querySelector(".note").textContent=lang==="en"?"Prices and pictures are examples.":translations.note;
+ const f=document.querySelectorAll(".footerinfo span");
+ f[0].textContent=lang==="en"?"Restaurant location — confirm address":translations.address;
+ f[1].innerHTML=lang==="en"?'<a href="tel:+0000000000">Add restaurant phone</a>':'<a href="tel:+0000000000">أضف رقم هاتف المطعم</a>';
+ f[2].textContent=lang==="en"?"Social links — add official profiles":translations.socials;
+ document.querySelector(".close").setAttribute("aria-label",lang==="en"?"Close":"إغلاق");
+ document.querySelector(".allergen").textContent=lang==="en"?"Please inform our team of any food allergies or dietary requirements. Menu descriptions are indicative; ingredients and preparation may vary. Prices and contact details must be verified with the restaurant before going live.":translations.allergen;
+ renderMenu();
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+const progressBar=document.getElementById("readingProgress");
+let progressTick=false;
+window.addEventListener("scroll",()=>{
+ if(progressTick)return;
+ progressTick=true;
+ requestAnimationFrame(()=>{
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  progressBar.style.width=(max>0?window.scrollY/max*100:0)+"%";
+  progressTick=false;
+ });
+},{passive:true});
+renderMenu();
+</script>
+</body></html>
